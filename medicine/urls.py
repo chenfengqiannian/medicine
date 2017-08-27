@@ -29,6 +29,8 @@ urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^admin/', include(admin.site.urls)),
 url(r'^messages/', views.messages),
+url(r'^scrollimage/', views.scrollImage),
+
 url(r'^imageupapi/', views.imageUpApi),
     url(r'^wxlogin/', views.wxLogin),
     url(r'^userinfo/', views.userInfo),

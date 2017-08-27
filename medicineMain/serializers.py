@@ -3,6 +3,9 @@ from django.contrib.auth.models import User, Group
 from models import *
 from rest_framework import serializers
 from django.shortcuts import render_to_response,render,get_object_or_404
+
+
+
 class UserSerializers(serializers.ModelSerializer):
     class Meta:
         model=XcxUser
@@ -16,7 +19,7 @@ class ImageSerializers(serializers.ModelSerializer):
 
     class Meta:
         model=UserImage
-        exclude = ('CaseHistoryForeign',)
+        exclude = ('caseHistotyForeign',)
 
 
 class CaseHistorySerializers(serializers.ModelSerializer):
@@ -24,10 +27,13 @@ class CaseHistorySerializers(serializers.ModelSerializer):
     userimage_set=ImageSerializers(many=True,read_only=True)
 
     def create(self, validated_data):
+
         image1=self.initial_data.get("image1",None)
         image2=self.initial_data.get("image2", None)
         symptom=self.initial_data.get("symptom",None)
-        caseHistory = CaseHistory.objects.create(**validated_data)
+        session_key = self.initial_data.get("session_key")
+        xcxUser = get_object_or_404(XcxUser, xcxSession=session_key)
+        caseHistory = CaseHistory.objects.create(xcxUserForeign=xcxUser,**validated_data)
         if(symptom):
             for i in symptom:
                 symptomObj=Symptom.objects.get(id=i)
@@ -51,7 +57,7 @@ class CaseHistorySerializers(serializers.ModelSerializer):
 
     class Meta:
         model=CaseHistory
-        fields = '__all__'
+        exclude = ('xcxUserForeign',)
 class AddressSerializers(serializers.ModelSerializer):
     def create(self, validated_data):
 
@@ -66,3 +72,9 @@ class AddressSerializers(serializers.ModelSerializer):
     class Meta:
         model = Address
         exclude = ('xcxUserForeign',)
+
+class ScrollImageSerializers(serializers.ModelSerializer):
+
+    class Meta:
+        model = ScrollImage
+        field="__all__"

@@ -135,12 +135,19 @@ class AddressViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.AddressSerializers
 
 
-
 def messages(request):
     messages=Message.objects.all().order_by("-createDateTime")
     list=[]
     for i in messages:
         list.append(i.text)
+
+
+    return JsonResponse(list,safe=False)
+def scrollImage(request):
+    messages=ScrollImage.objects.all()
+    list=[]
+    for i in messages:
+        list.append("http://"+request.get_host()+i.image.url)
 
 
     return JsonResponse(list,safe=False)
