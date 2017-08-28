@@ -15,7 +15,8 @@ class XcxUser(models.Model):
     country = models.CharField(max_length=255, blank=True)
     avatarUrl = models.CharField(max_length=255, blank=True)
     nickname = models.CharField(max_length=255, blank=True)
-
+    def __unicode__(self):
+        return self.nickname
 class CaseHistory(models.Model):
     xcxUserForeign=models.ForeignKey(XcxUser)
     name=models.CharField(u"姓名",max_length=255,blank=True)
@@ -30,11 +31,15 @@ class CaseHistory(models.Model):
     modDateTime = models.DateTimeField(u'最后修改日期', auto_now=True)
     createDateTime = models.DateTimeField(u'创建日期', auto_now_add=True)
     physicalCondition=models.CharField(u"身体状况", max_length=255, blank=True)
+    def __unicode__(self):
+        return self.name
 class Symptom(models.Model):
     CaseHistoryForeign=models.ManyToManyField(CaseHistory,blank=True)
     symptomName=models.CharField(u"症状名",max_length=255)
     sickChoices = ((-1, u'胃寒'), (1, u'胃热'))
     sick=models.IntegerField(u'病症',choices=sickChoices,default=0)
+    def __unicode__(self):
+        return self.symptomName
 class UserImage(models.Model):
     caseHistotyForeign=models.ForeignKey(CaseHistory,blank=True,null=True)
     image=models.ImageField(u'图片',upload_to='images', max_length=255)
@@ -44,6 +49,8 @@ class Message(models.Model):
     text=models.TextField(u"消息",max_length=255)
     modDateTime = models.DateTimeField(u'最后修改日期', auto_now=True)
     createDateTime = models.DateTimeField(u'创建日期', auto_now_add=True)
+    def __unicode__(self):
+        return self.text
 class Address(models.Model):
     xcxUserForeign = models.ForeignKey(XcxUser)
     name=models.CharField(u"姓名",max_length=255)
@@ -53,6 +60,8 @@ class Address(models.Model):
     city=models.CharField(u'市',max_length=255,blank=True)
     district=models.CharField(u'区',max_length=255,blank=True)
     countyName=models.CharField(u'国',max_length=255,blank=True)
+    def __unicode__(self):
+        return self.name
 
 
 
