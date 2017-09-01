@@ -30,10 +30,12 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 url(r'^messages/', views.messages),
 url(r'^scrollimage/', views.scrollImage),
-
+url(r'^indeximage/', views.indexImage),
 url(r'^imageupapi/', views.imageUpApi),
     url(r'^wxlogin/', views.wxLogin),
     url(r'^userinfo/', views.userInfo),
 url(r'^onlogin/', views.onLogin),
+url(r'^code/', views.code),
+
 url(r'^media/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.MEDIA_ROOT})
 ]

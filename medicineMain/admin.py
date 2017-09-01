@@ -2,12 +2,30 @@ from django.contrib import admin
 import models
 # Register your models here.
 
+class ImageInline(admin.StackedInline):
+    model = models.UserImage
 
-admin.site.register(models.CaseHistory)
-admin.site.register(models.XcxUser)
+
+class CaseHistoryAdmin(admin.ModelAdmin):
+    inlines = [ImageInline,]
+    list_filter = ('physicalCondition',)
+    list_display = (
+    'name','tel','modDateTime','physicalCondition' )
+    search_fields = ['name', 'tel']
+class XcxUserAdmin(admin.ModelAdmin):
+
+
+    list_display = (
+    'phone','nickname')
+    search_fields = ['nickname', 'phone']
+
+
+admin.site.register(models.CaseHistory,CaseHistoryAdmin)
+admin.site.register(models.XcxUser,XcxUserAdmin)
 admin.site.register(models.ScrollImage)
 admin.site.register(models.Message)
 admin.site.register(models.Symptom)
 admin.site.register(models.UserImage)
+admin.site.register(models.IndexImage)
 
 

@@ -32,7 +32,12 @@ def getSession():
 
 
     return hashlib.sha1(os.urandom(24)).hexdigest()
+def getCode():
 
+
+
+#TODO test only
+    return "3422"
 def getXCXData(appid,secret,js_code):
     r=requests.get('https://api.weixin.qq.com/sns/jscode2session', params={'appid': appid,'secret':secret,'js_code':js_code,'grant_type':'authorization_code'})  # 最基本的GET请求
     data=r.json()
@@ -147,7 +152,21 @@ def scrollImage(request):
     messages=ScrollImage.objects.all()
     list=[]
     for i in messages:
-        list.append("http://"+request.get_host()+i.image.url)
+        dict={}
+        dict["image"]="http://"+request.get_host()+i.image.url
+        if(i.imageDetail):
+            dict["imageDetail"]="http://"+request.get_host()+i.imageDetail.url
+        else:
+            dict["imageDetail"] =""
+        list.append(dict)
+
+
+    return JsonResponse(list,safe=False)
+def indexImage(request):
+    messages=IndexImage.objects.all()
+    list=[]
+    if(len(messages)>=1):
+        list.append("http://"+request.get_host()+messages[0].image.url)
 
 
     return JsonResponse(list,safe=False)
@@ -189,4 +208,33 @@ def onLogin(request):
             return JsonResponse({"is_login":2})
         else:
             return JsonResponse({"is_login":0})
+
+def code(request):
+    if  request.method =="GET":
+        session_key = request.GET.get("session_key", None)
+        xcxUser = get_object_or_404(XcxUser, xcxSession=session_key)
+        phone = request.GET.get("phone", None)
+        if(phone):
+            xcxUser.code=getCode()
+            xcxUser.save()
+            return HttpResponse("ok")
+
+        else:
+            return HttpResponseBadRequest("fail")
+    if request.method=="POST":
+        session_key = request.POST.get("session_key", None)
+        xcxUser = get_object_or_404(XcxUser, xcxSession=session_key)
+        code = request.POST.get("code", None)
+        phone = request.POST.get("phone", None)
+        if(code and phone):
+            if(code==xcxUser.code):
+                xcxUser.phone=phone
+                xcxUser.save()
+                return HttpResponse(u"成功")
+            else:
+                return HttpResponseBadRequest(u"验证码错误")
+        else:
+            return HttpResponseBadRequest(u"参数错误")
+
+
 
