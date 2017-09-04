@@ -32,12 +32,18 @@ def getSession():
 
 
     return hashlib.sha1(os.urandom(24)).hexdigest()
-def getCode():
+def getCode(phone):
+    code=os.urandom(4)
+    r = requests.get(' http://qxt.fungo.cn/Recv_center',
+                     params={'CpName': "rkdf", 'CpPassword': "rk0902",
+                             'DesMobile': phone,"Content":"您的验证码是"+code})  # 最基本的GET请求
+
+
 
 
 
 #TODO test only
-    return "3422"
+    return code
 def getXCXData(appid,secret,js_code):
     r=requests.get('https://api.weixin.qq.com/sns/jscode2session', params={'appid': appid,'secret':secret,'js_code':js_code,'grant_type':'authorization_code'})  # 最基本的GET请求
     data=r.json()
