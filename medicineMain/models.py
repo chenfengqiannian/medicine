@@ -16,6 +16,7 @@ class XcxUser(models.Model):
     avatarUrl = models.CharField(max_length=255, blank=True)
     nickname = models.CharField(max_length=255, blank=True)
     code=models.CharField(max_length=255,blank=True)
+
     def __unicode__(self):
         return self.nickname
     class Meta:
@@ -35,6 +36,8 @@ class CaseHistory(models.Model):
     modDateTime = models.DateTimeField(u'最后修改日期', auto_now=True)
     createDateTime = models.DateTimeField(u'创建日期', auto_now_add=True)
     physicalCondition=models.CharField(u"身体状况", max_length=255, blank=True)
+    bodyChoices = ((-1, u'胃寒'),(0,u"胃中性"), (1, u'胃热'))
+    body = models.IntegerField(u'身体状况', choices=bodyChoices, default=0)
     def __unicode__(self):
         return self.name
     class Meta:
