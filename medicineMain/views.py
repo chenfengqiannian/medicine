@@ -110,7 +110,7 @@ class CaseHistoryViewSet(viewsets.ModelViewSet):
     API endpoint that allows users to be viewed or edited.
     """
     def get_queryset(self):
-        queryset = CaseHistory.objects.all()
+        queryset = CaseHistory.objects.all().order_by("-modDateTime")
 
         session_key = self.request.query_params.get("session_key")
         if session_key is not None:
@@ -121,7 +121,7 @@ class CaseHistoryViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-    queryset = CaseHistory.objects.all()
+    queryset = CaseHistory.objects.all().order_by("modDateTime")
     serializer_class = serializers.CaseHistorySerializers
 
 class AddressViewSet(viewsets.ModelViewSet):
