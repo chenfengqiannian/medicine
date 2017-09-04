@@ -168,6 +168,8 @@ def indexImage(request):
     list=[]
     if(len(messages)>=1):
         list.append("http://"+request.get_host()+messages[0].image.url)
+    if (len(messages) >= 2):
+        list.append("http://" + request.get_host() + messages[1].image.url)
 
 
     return JsonResponse(list,safe=False)
