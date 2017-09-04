@@ -16,7 +16,7 @@ class XcxUserAdmin(admin.ModelAdmin):
     list_filter = ('body',)
     list_display = (
     'phone','nickname')
-    search_fields = ['nickname', 'phone']
+    search_fields = ['nickname', 'phone','body']
 
 
 admin.site.register(models.CaseHistory,CaseHistoryAdmin)
