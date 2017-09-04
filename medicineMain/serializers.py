@@ -30,13 +30,14 @@ class CaseHistorySerializers(serializers.ModelSerializer):
 
         image1=self.initial_data.get("image1",None)
         image2=self.initial_data.get("image2", None)
-        symptom=self.initial_data.get("symptom",None)
+
         session_key = self.initial_data.get("session_key")
         xcxUser = get_object_or_404(XcxUser, xcxSession=session_key)
         caseHistory = CaseHistory.objects.create(xcxUserForeign=xcxUser,**validated_data)
-        if(symptom):
-            for i in symptom:
-                symptomObj=Symptom.objects.get(id=i)
+
+        for i in self.initial_data.items():
+            if("symptom" in i[0]):
+                symptomObj=Symptom.objects.get(id=i[1])
                 symptomObj.CaseHistoryForeign.add(caseHistory)
                 symptomObj.save()
         if(image1):
