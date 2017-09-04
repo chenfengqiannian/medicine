@@ -23,7 +23,7 @@ router = routers.DefaultRouter()
 router.register(r'casehistory', views.CaseHistoryViewSet)
 router.register(r'symptom', views.SymptomViewSet)
 router.register(r'address', views.AddressViewSet)
-
+router.register(r'messages', views.MessagesViewSet)
 
 urlpatterns = [
     url(r'^api/', include(router.urls)),

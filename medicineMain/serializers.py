@@ -14,6 +14,10 @@ class SymptomSerializers(serializers.ModelSerializer):
     class Meta:
         model = Symptom
         exclude = ('CaseHistoryForeign',)
+class MessagesSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Symptom
+        exclude = ('CaseHistoryForeign',)
 
 class ImageSerializers(serializers.ModelSerializer):
 

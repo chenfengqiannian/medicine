@@ -173,6 +173,9 @@ def indexImage(request):
 
 
     return JsonResponse(list,safe=False)
+class MessagesViewSet(viewsets.ModelViewSet):
+    queryset = Message.objects.all()
+    serializer_class = serializers.MessagesSerializers
 class SymptomViewSet(viewsets.ModelViewSet):
     queryset = Symptom.objects.all()
     serializer_class = serializers.SymptomSerializers
