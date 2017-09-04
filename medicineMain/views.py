@@ -33,10 +33,10 @@ def getSession():
 
     return hashlib.sha1(os.urandom(24)).hexdigest()
 def getCode(phone):
-    code=random.randint(1000,9999)
+    code=str(random.randint(1000,9999))
     r = requests.get(' http://qxt.fungo.cn/Recv_center',
                      params={'CpName': "rkdf", 'CpPassword': "rk0902",
-                             'DesMobile': phone,"Content":"您的验证码是"+code})  # 最基本的GET请求
+                             'DesMobile': phone,"Content":"【短信吧】您的验证码是"+code+".一分钟内有效"})  # 最基本的GET请求
 
     return code
 def getXCXData(appid,secret,js_code):
@@ -216,7 +216,7 @@ def code(request):
         xcxUser = get_object_or_404(XcxUser, xcxSession=session_key)
         phone = request.GET.get("phone", None)
         if(phone):
-            xcxUser.code=getCode()
+            xcxUser.code=getCode(phone)
             xcxUser.save()
             return HttpResponse("ok")
 
