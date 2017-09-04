@@ -216,7 +216,7 @@ def code(request):
         xcxUser = get_object_or_404(XcxUser, xcxSession=session_key)
         phone = request.GET.get("phone", None)
         if(phone):
-            xcxUser.code=getCode()
+            xcxUser.code=getCode(phone)
             xcxUser.save()
             return HttpResponse("ok")
 
