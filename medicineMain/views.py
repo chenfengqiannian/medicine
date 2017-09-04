@@ -23,7 +23,7 @@ import os
 # Create your views here.
 import requests
 import hashlib
-import os
+import random
 
 
 def getSession():
@@ -33,7 +33,7 @@ def getSession():
 
     return hashlib.sha1(os.urandom(24)).hexdigest()
 def getCode(phone):
-    code=os.urandom(4)
+    code=random.randint(1000,9999)
     r = requests.get(' http://qxt.fungo.cn/Recv_center',
                      params={'CpName': "rkdf", 'CpPassword': "rk0902",
                              'DesMobile': phone,"Content":"您的验证码是"+code})  # 最基本的GET请求
