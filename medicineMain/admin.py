@@ -8,13 +8,12 @@ class ImageInline(admin.StackedInline):
 
 class CaseHistoryAdmin(admin.ModelAdmin):
     inlines = [ImageInline,]
-    list_filter = ('physicalCondition',)
+
     list_display = (
     'name','tel','modDateTime','physicalCondition' )
     search_fields = ['name', 'tel']
 class XcxUserAdmin(admin.ModelAdmin):
-
-
+    list_filter = ('body',)
     list_display = (
     'phone','nickname')
     search_fields = ['nickname', 'phone']
