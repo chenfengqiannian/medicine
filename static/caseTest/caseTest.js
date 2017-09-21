@@ -123,6 +123,8 @@ function subit() {
 
   data.append("image1",image1id)
   data.append("image2",image2id)
+     data.append("physicalCondition",$("#sickspan").text())
+
 
 
 
