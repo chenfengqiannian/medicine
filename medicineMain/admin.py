@@ -15,7 +15,7 @@ class CaseHistoryAdmin(admin.ModelAdmin):
 class XcxUserAdmin(admin.ModelAdmin):
     list_filter = ('body',)
     list_display = (
-    'phone','nickname')
+    'phone','nickname','body')
     search_fields = ['nickname', 'phone','body']
 
 

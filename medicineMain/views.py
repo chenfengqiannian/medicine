@@ -291,7 +291,7 @@ def wxindex(request):
 
 
 def index(request):
-    indexImage=IndexImage.objects.get(id=1).image.url
+    indexImage=IndexImage.objects.get(id=2).image.url
     scrollImages=ScrollImage.objects.all()
     scrollImagesList=[]
     #TODO test openid
@@ -304,7 +304,7 @@ def index(request):
         scrollImagesList.append(scrollImagesDict)
 
 
-    return render(request,"index.html",{"indexImage":indexImage,"imagelist":scrollImagesList,"session_key":xcxSession})
+    return render(request,"index.html",{"indexImage":indexImage,"imagelist":scrollImagesList,"session_key":xcxSession,"title":u"首页"})
 def addAddress(request):
 
     return render(request,"addAddress.html")

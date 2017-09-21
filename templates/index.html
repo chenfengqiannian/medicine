@@ -18,6 +18,7 @@
     </script>
 </head>
 <body>
+{%include 'nav.html' %}
 <div class="container">
   <image  src="{{indexImage}}" id="image2"/>
 
@@ -32,7 +33,7 @@
         </div>
       
   </a>
-      <a href="/caseOrder/?session_key={{ session_key }}" class="inner-content" catchtap="mycase">
+      <a href="/caseOrder/?session_key={{ session_key }}&type=case" class="inner-content" catchtap="mycase">
           
           <image class="list-img" src="../static/images/index_05.jpg"  mode="aspectFit"></image>
           <div class="title-container" >

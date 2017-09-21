@@ -16,9 +16,8 @@ class SymptomSerializers(serializers.ModelSerializer):
         exclude = ('CaseHistoryForeign',)
 class MessagesSerializers(serializers.ModelSerializer):
     class Meta:
-        model = Symptom
-        exclude = ('CaseHistoryForeign',)
-
+        model = Message
+	fields="__all__"
 class ImageSerializers(serializers.ModelSerializer):
 
     class Meta:
@@ -82,4 +81,4 @@ class ScrollImageSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = ScrollImage
-        field="__all__"
+        fields="__all__"
