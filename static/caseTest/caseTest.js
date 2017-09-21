@@ -140,12 +140,16 @@ function subit() {
         mimeType: "multipart/form-data",
         success: function (returndata) {
             console.log(returndata.toString());
+            alert("提交成功")
+            window.history.back()
+
 
 
 
         },
         error: function (returndata) {
             console.log(returndata.toString());
+            alert("提交失败")
         }
     });
 
