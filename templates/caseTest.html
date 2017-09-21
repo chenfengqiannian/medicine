@@ -1,0 +1,158 @@
+<!--caseTest.wxml-->
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/public.css">
+
+    <link rel="stylesheet" href="../static/caseTest/caseTest.css">
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="../static/caseTest/caseTest.js"></script>
+    <script type="text/javascript">
+
+
+    </script>
+</head>
+<body>
+{% include 'nav.html' %}
+<div class="container">
+    <form id="subform" method='post' action="/casehis/">
+
+        <div class="item-backgroud">
+            <div class="dialog-block-item">
+                <text class="item-label">姓名</text>
+                <input  🆔id="name" name="name" type="text" class="edit-input" value="{{ name }}" {% if disable %}
+                       disabled="disabled"{% endif %}/>
+
+            </div>
+            <div class="dialog-block-item">
+                <text class="item-label">联系电话</text>
+                <input  id="tel" name="tel" class="edit-input" value="{{ tel }}" {% if disable %}
+                       disabled="disabled"{% endif %} />
+
+            </div>
+            <div class="dialog-block-item">
+                <text class="item-label">身高(cm)</text>
+                <input class="edit-input" name="height" value="{{ height }}"{% if disable %}
+                       disabled="disabled"{% endif %} />
+
+            </div>
+            <div class="dialog-block-item">
+                <text class="item-label">体重(kg)</text>
+                <input class="edit-input" name="weight" value="{{ weight }}" {% if disable %}
+                       disabled="disabled"{% endif %}/>
+
+            </div>
+        </div>
+        <div class="item-backgroud">
+            <div class="dialog-block-item">
+                <text class="item-label">选择出生日期</text>
+                <input class="pick" type="date" name="birthday" value="{{ birthday }}" {% if disable %}
+                       disabled="disabled"{% endif %}/>
+
+            </div>
+            <select class="dialog-block-item pick" name="sex">
+                <option value="请选择性别">请选择性别</option>
+                <option value="男" {% ifequal sex "男" %}
+                        selected="selected"
+                {% endifequal %}>男
+                </option>
+                <option value="女" {% ifequal sex "女" %}
+                        selected="selected"
+                {% endifequal %}>女
+                </option>
+            </select>
+
+            <select class="dialog-block-item pick" name="figure">
+                <option value="请选择性别">请选择体形</option>
+                <option value="正常" {% ifequal figure "正常" %}
+                        selected="selected"
+                {% endifequal %}>正常</option>
+                <option value="偏瘦" {% ifequal figure "偏瘦" %}
+                        selected="selected"
+                {% endifequal %}>偏瘦</option>
+                <option value="偏" {% ifequal figure "瘦" %}
+                        selected="selected"
+                {% endifequal %}>瘦</option>
+                <option value="偏胖" {% ifequal figure "偏胖" %}
+                        selected="selected"
+                {% endifequal %}>偏胖</option>
+                <option value="胖" {% ifequal figure "胖" %}
+                        selected="selected"
+                {% endifequal %}>胖</option>
+            </select>
+
+
+        </div>
+
+
+        <div class="item-backgroud">
+
+            <div class="dialog-block-item-big">
+                <text class="item-label">填写过敏史</text>
+                <textarea class="edit-textarea" name="allergyHistory">{{allergyHistory}}</textarea>
+            </div>
+        </div>
+        <div class="item-backgroud">
+
+            <div class="dialog-block-item-big">
+                <text class="item-label">过去得过什么病</text>
+                <textarea class="edit-textarea" name="medicalHistory">{{medicalHistory}}</textarea>
+
+            </div>
+        </div>
+
+        <div class="item-backgroud">
+            <text class="item-label">上传二张舌苔照片(要求：自然光线下，放松）</text>
+            <div class="image-item">
+
+                <image src="{{ userimage_set.0.image|default:'../static/images/upimage_03.png' }}" catchtap="upimage1"
+                       class="upimage" id="image1">
+                    <input type="file" class="upload-input" id="upload" accept="image/*"/>
+
+                     </image>
+                <image src="{{ userimage_set.1.image|default:'../static/images/upimage_03.png' }}" id="image2" catchtap="upimage2"
+                       class="upimage"> <input type="file" style="margin-left: 110px" class="upload-input" id="upload2" accept="image/*"/></image>
+
+            </div>
+        </div>
+
+        <div class="item-backgroud">
+
+            <text class="item-label">选择症状 (最少不低于六项)</text>
+
+            <div class="dialog-block-item item-symptom">
+                {% for foo in symptom_set %}
+
+
+
+
+                    <button type="button" class="item-symptom-button {% if foo.select %}item-symptom-button-selectd{% endif %}"
+                            data-id="{{ foo.id }}"data-sick="{{ foo.sick }}" {% if disable %}
+                            disabled="disabled"{% endif %}>{{ foo.symptomName }} </button>
+
+
+                {% endfor %}
+            </div>
+
+            <div class="dialog-block-item">
+                <text class="item-label">身体状况:</text>
+                <text class="item-label" id="sickspan">{{ physicalCondition }}</text>
+            </div>
+        </div>
+
+        {% if not disable %}
+            <button class="btn btn-block button" id="sub" type="button">提交</button>
+        {% endif %}
+
+    </form>
+
+</div>
+</body>
+</html>

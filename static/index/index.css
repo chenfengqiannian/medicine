@@ -1,0 +1,81 @@
+/**index.wxss**/
+.userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userinfo-avatar {
+    width: 64px;
+    height: 64px;
+    margin: 10px;
+    border-radius: 50%;
+}
+
+.userinfo-nickname {
+    color: #aaa;
+}
+
+.usermotto {
+    margin-top: 200px;
+}
+
+.block {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.list-img {
+    width: 87px;
+    height: 87px;
+
+}
+
+.title {
+    text-align: center
+
+}
+
+.slide-a
+{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    height: 232px;
+}
+.slide-a:not(:first-child) {
+    display: none;
+}
+.lunbo
+{ height: 232px;
+
+}
+.slide-image {
+    width: 100%;
+    height: 100%
+}
+
+.kefubutton {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    opacity: 0;
+
+}
+
+#image2 {
+    height: 170px;
+    width: 100%;
+}
+
+body {
+    -webkit-user-select: none;
+    user-select: none;
+    width: 100%;
+    overflow-x: hidden;
+
+}

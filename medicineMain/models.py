@@ -4,6 +4,7 @@ from django.db import models
 class XcxUser(models.Model):
     openid = models.CharField(max_length=255)
     session = models.CharField(max_length=255, blank=True)
+
     xcxSession = models.CharField(max_length=255, blank=True)
     modDateTime = models.DateTimeField(u'最后修改日期', auto_now=True)
     createDateTime = models.DateTimeField(u'创建日期', auto_now_add=True)
@@ -64,6 +65,7 @@ class UserImage(models.Model):
 class ScrollImage(models.Model):
     image=models.ImageField(u"图片",upload_to="images",max_length=255)
     imageDetail=models.ImageField(u"内部详情",upload_to="images",max_length=255,blank=True)
+    url=models.URLField(u"跳转地址",blank=True)
     class Meta:
         verbose_name=u"滚动图片"
         verbose_name_plural=u"滚动图片"

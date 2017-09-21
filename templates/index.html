@@ -1,0 +1,61 @@
+<!--index.wxml-->
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/index/index.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../static/index/index.js"></script>
+
+    <script type="text/javascript">
+
+
+
+
+    </script>
+</head>
+<body>
+<div class="container">
+  <image  src="{{indexImage}}" id="image2"/>
+
+  <div class="block">
+  <a href="/caseTest/?session_key={{ session_key }}" class="inner-content" catchtap="test">
+
+          <image class="list-img" src="../static/images/index_08.jpg"  mode="aspectFit"></image>
+          <div class="title-container">
+            <div class="title">我的自测</div>
+
+            
+        </div>
+      
+  </a>
+      <a href="/caseOrder/?session_key={{ session_key }}" class="inner-content" catchtap="mycase">
+          
+          <image class="list-img" src="../static/images/index_05.jpg"  mode="aspectFit"></image>
+          <div class="title-container" >
+            <div class="title">个人档案</div>
+            
+        </div>
+      
+  </a>
+  </div>
+
+<div id="lunbo">
+
+        {% for image in imagelist %}
+
+<a class="slide-a" href="{{ image.url }}"> <img class="slide-image" src="{{ image.image }}"></a>
+
+    {% endfor %}
+
+</div>
+
+
+
+</div>
+</body>
+</html>
+

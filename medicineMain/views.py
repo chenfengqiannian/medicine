@@ -43,7 +43,14 @@ def getXCXData(appid,secret,js_code):
     r=requests.get('https://api.weixin.qq.com/sns/jscode2session', params={'appid': appid,'secret':secret,'js_code':js_code,'grant_type':'authorization_code'})  # 最基本的GET请求
     data=r.json()
     return data
-
+def getSnsData(appid,secret,code):
+    r=requests.get('https://api.weixin.qq.com/sns/oauth2/access_token', params={'appid': appid,'secret':secret,'code':code,'grant_type':'authorization_code'})  # 最基本的GET请求
+    data=r.json()
+    return data
+def getSnsUserData(access_token,openid):
+    r=requests.get('https://api.weixin.qq.com/sns/userinfo', params={'access_token': access_token,'openid':openid,'lang':"zh_CN"})  # 最基本的GET请求
+    data=r.json()
+    return data
 
 def wxLogin(request):
     if request.method=='POST':
@@ -242,5 +249,131 @@ def code(request):
         else:
             return HttpResponseBadRequest(u"参数错误")
 
+
+
+import hashlib
+from wechat_sdk import WechatBasic
+from django.shortcuts import render
+from django.http.response import *
+
+from models import *
+WEIXIN_TOKEN = 'write-a-value'
+
+WECHAT_TOKEN = 'zqxt'
+AppID = ''
+AppSecret = ''
+
+# 实例化 WechatBasic
+wechat_instance = WechatBasic(
+    token=settings.TOKEN,
+    appid=settings.SNS_ID,
+    appsecret=settings.SNS_SECRET
+)
+
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+def wxindex(request):
+    if request.method == 'GET':
+        # 检验合法性
+        # 从 request 中提取基本信息 (signature, timestamp, nonce, xml)
+        signature = request.GET.get('signature')
+        timestamp = request.GET.get('timestamp')
+        nonce = request.GET.get('nonce')
+
+        if not wechat_instance.check_signature(
+                signature=signature, timestamp=timestamp, nonce=nonce):
+            return HttpResponseBadRequest('Verify Failed')
+
+        return HttpResponse(
+            request.GET.get('echostr', ''), content_type="text/plain")
+
+
+
+def index(request):
+    indexImage=IndexImage.objects.get(id=1).image.url
+    scrollImages=ScrollImage.objects.all()
+    scrollImagesList=[]
+    #TODO test openid
+    xcxSession = "5f9ee9007804ae13b54809a5e4c4225cbda8e936"
+
+    for i in scrollImages:
+        scrollImagesDict = {}
+        scrollImagesDict["image"]=i.image.url
+        scrollImagesDict["url"]=i.url
+        scrollImagesList.append(scrollImagesDict)
+
+
+    return render(request,"index.html",{"indexImage":indexImage,"imagelist":scrollImagesList,"session_key":xcxSession})
+def addAddress(request):
+
+    return render(request,"addAddress.html")
+def bindCellPhone(request):
+
+    return render(request,"bindCellphone.html")
+
+def caseOrder(request):
+    session_key = request.GET.get("session_key", "5f9ee9007804ae13b54809a5e4c4225cbda8e936")
+    type=request.GET.get("type")
+    xcxUser = get_object_or_404(XcxUser, xcxSession=session_key)
+    list=[]
+    obj=None;
+    if(type=="case"):
+        obj=xcxUser.casehistory_set.all()
+    if(type=="message"):
+        obj=Message.objects.all()
+    for i in obj:
+        dic={}
+        dic["modDateTime"]=i.modDateTime
+        if(type=="case"):
+            dic["url"]="/caseTest/?id="+str(i.id)
+        if (type == "message"):
+            dic["url"] = ""
+        if (type == "case"):
+            dic["text"] =i.physicalCondition
+        if (type == "message"):
+            dic["text"] = i.text
+        list.append(dic)
+
+
+
+    if(type=="case"):
+        title="历史列表"
+    if (type == "message"):
+        title = "消息列表"
+    return render(request,"caseOrder.html",{"list":list,"title":title})
+def caseTest(request):
+    if request.method == "GET":
+        id=request.GET.get("id",None)
+        queryset = Symptom.objects.all()
+        list= serializers.SymptomSerializers(queryset,many=True,context={'request': request}).data
+        if(id):
+            caseHistory=get_object_or_404(CaseHistory,id=id)
+            dict = serializers.CaseHistorySerializers(caseHistory, many=False, context={'request': request}).data
+            dict["disable"]=True
+            for i in list:
+                for j in dict["symptom_set"]:
+                    if(i["id"]==j["id"]):
+                        i["select"]=True
+
+
+            dict["symptom_set"] = list
+
+
+
+            return render(request,"caseTest.html",dict)
+        dict={}
+        dict["symptom_set"]=list
+        dict["disable"] = False
+        return render(request,"caseTest.html",dict)
+
+
+def myAddress(request):
+    return render(request,"myAddress.html",{"title":u"我的地址"})
+def page10070(request):
+    # TODO test openid
+    xcxSession = "5f9ee9007804ae13b54809a5e4c4225cbda8e936"
+    image=IndexImage.objects.get(id=3)
+    return render(request,"page10070.html",{"session_key":xcxSession,"image":image.image.url,"title":u"个人中心"})
 
 
