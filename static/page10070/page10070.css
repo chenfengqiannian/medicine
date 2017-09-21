@@ -1,0 +1,68 @@
+/* pages/page10070/page10070.wxss */
+.number
+{
+
+
+  position: absolute; 
+  width: 100%;
+  height: 46px;
+  opacity: 0; 
+  z-index: 99999;
+}
+text
+{
+  color: black;
+}
+.cover-thumb
+{width: 58px;
+height: 58px;}
+.show-div
+{
+  height: 117px;
+}
+.cover-thumb
+{
+  vertical-align:middle;
+
+}
+.show
+
+{
+  margin-top: 28px;
+  margin-left: 29px;
+}
+.line
+{
+  display: block;
+  line-height:46px;
+height:46px;
+padding-left: 10px;
+  padding-right: 10px;
+color:#666;
+border-bottom:1px solid #eee;
+background:#FFF;
+border-top:1px solid #eee;
+  position: relative;
+
+}
+label,span
+{
+  color: black;
+}
+
+.icon-rightarrow
+{
+margin-left: calc(100% - 117px);
+}
+.line span
+{
+  margin-left: 5px;
+}
+.detail{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top:0;
+  display: none;
+
+}

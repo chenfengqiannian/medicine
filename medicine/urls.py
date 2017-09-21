@@ -36,6 +36,15 @@ url(r'^imageupapi/', views.imageUpApi),
     url(r'^userinfo/', views.userInfo),
 url(r'^onlogin/', views.onLogin),
 url(r'^code/', views.code),
+url(r'^index/', views.index),
+url(r'^bindCellPhone/', views.bindCellPhone),
+url(r'^caseOrder/', views.caseOrder),
+url(r'^caseTest/', views.caseTest),
+
+url(r'^myAddress/', views.myAddress),
+url(r'^page10070/', views.page10070),
+url(r'^addAddress/', views.addAddress),
+
 
 url(r'^media/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.MEDIA_ROOT})
 ]

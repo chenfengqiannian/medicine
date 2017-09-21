@@ -1,0 +1,141 @@
+/* caseTest.wxss */
+
+.container {
+
+    background: #f3f3f3;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.edit-input, .picker-container {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 75%;
+    height: 36px;
+    padding: 4px 20px;
+    vertical-align: middle;
+    border-radius: 4px;
+    border: none;
+}
+
+.picker-container {
+    height: auto;
+    padding: 10px 20px;
+}
+
+.item-fix-height {
+    padding: 10px 0;
+    height: 37px;
+
+}
+
+.item-label {
+    color: #a4a4a4;
+    size: 32 sp;
+    margin-left: 22px;
+    line-height: 32px;
+}
+
+.item-backgroud {
+    margin-bottom: 5px;
+    background: #ffffff;
+
+}
+
+.icon-rightarrow {
+    position: relative;
+    width: 20px;
+    height: 30px;
+    line-height: 20px;
+    font-size: 16px;
+    float: right;
+    color: #aaa;
+    margin-top: 6px;
+    margin-right: 0;
+}
+
+.icon-rightarrow {
+    line-height: 23px
+}
+
+.edit-textarea {
+    margin-left: 3px;
+    padding: 4px 20px;
+    width: 100%;
+}
+
+.upimage {
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+    margin-left: 5px;
+}
+
+.image-item {
+    display: block;
+    margin-left: 22px;
+
+}
+
+.button {
+    background: #437dff;
+    margin-left: 10px;
+    margin-righ: 10px;
+    color: #ffffff;
+    font-size: 20px;
+    margin-bottom: 15px;
+
+}
+
+.item-symptom {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 15px;
+}
+
+.item-symptom-button {
+    font-size: 15px;
+    border: 1px solid #a4a4a4;
+    color: #a4a4a4;
+    margin-left: initial;
+    background: transparent;
+    margin-right: 3px;
+    margin-bottom: 5px;
+}
+
+.item-symptom-button-selectd {
+
+    border: 1px solid #437dff;
+    color: #437dff;
+}
+
+body {
+    padding-bottom: 20px;
+
+}
+
+.pick {
+    margin-left: 22px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: block;
+    width: 90%;
+}
+
+select {
+    border: transparent;
+    background: transparent;
+
+}
+
+
+.upload-input {
+
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    opacity: 0;
+    z-index: 999999;
+    margin-top: -100px;
+}

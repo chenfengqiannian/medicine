@@ -1,0 +1,34 @@
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/bindCellphone/bindCellphone.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+
+
+
+
+    </script>
+</head>
+<body>
+<div class="page bindPhone-wrap" id="bindPhonePage" data-router="bindPhonePage">
+ 
+  <div class="bind-new-tel-wrap" >
+    <div class="verify-row" style="border-bottom: 1px solid #e5e5e5;">
+      <label class="item-name">手机号</label><input class="code-tel" bindinput="inputPhone" placeholder="请输入手机号"/>
+    </div>
+    <div class="verify-row">
+      <label class="item-name">验证码</label><input bindinput="inputNewCode" placeholder="请输入验证码"/><label class="get-code-btn" bindtap="sendCodeToNewPhone">{{ newCodeStatus }}</label>
+    </div>
+    <label class="bind-new-tel-btn {{ !newPhone |default: !newCode ? 'disabled' : '' }}" bindtap="bindNewPhone">绑定手机</label>
+  
+  </div>
+</div>
+</body>
+</html>
+

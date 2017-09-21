@@ -112,13 +112,17 @@ USE_L10N = True
 USE_TZ = True
 XCX_ID="wx2111dcabe5669d87"
 XCX_SECRET="7bca9239e9b351532571e5006680c12f"
+SNS_ID=""
+SNS_SECRET=""
+TOKEN=""
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
-#STATICFILES_DIRS = (
- #   os.path.join(BASE_DIR, "static"),
-#)
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL='/static/'

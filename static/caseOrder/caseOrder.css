@@ -1,0 +1,36 @@
+/* pages/caseOrder/caseOrder.wxss */
+
+
+.container {
+  
+
+  width: 100%;
+  overflow:hidden;
+  overflow-y:auto;
+
+}
+.dialog-block-item{
+  padding: 10px 0;
+  background: #ffffff;
+ 
+  
+}
+.item-text
+{display: block;
+margin-left: 22px;
+}
+
+page
+{
+  background: #f3f3f3;
+}
+#text1
+{
+  
+  font-size: 18px;
+}
+#text2
+{margin-top: 5px;
+  color: #a4a4a4;
+  font-size: 13px;
+}
