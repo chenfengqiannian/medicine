@@ -291,11 +291,25 @@ def wxindex(request):
 
 
 def index(request):
+
     indexImage=IndexImage.objects.get(id=2).image.url
     scrollImages=ScrollImage.objects.all()
     scrollImagesList=[]
-    #TODO test openid
-    xcxSession = "5f9ee9007804ae13b54809a5e4c4225cbda8e936"
+
+    code=request.GET.get("code")
+    xcxUser = snsuser(code)
+    xcxSession=xcxUser.xcxSession
+
+
+
+
+
+
+
+
+
+
+
 
     for i in scrollImages:
         scrollImagesDict = {}
@@ -305,6 +319,25 @@ def index(request):
 
 
     return render(request,"index.html",{"indexImage":indexImage,"imagelist":scrollImagesList,"session_key":xcxSession,"title":u"首页"})
+
+
+def snsuser(code):
+    snsdata = getSnsData(settings.SNS_ID, settings.SNS_SECRET, code)
+    userdata = getSnsUserData(snsdata["access_token"], snsdata["openid"])
+    xcxUserRaw = XcxUser.objects.get_or_create(openid=snsdata['openid'])
+    xcxUser = xcxUserRaw[0]
+    xcxUser.session = snsdata['access_token']
+    xcxUser.xcxSession = getSession()
+    xcxUser.nickname = userdata["nickname"]
+    xcxUser.gender = userdata["sex"]
+    xcxUser.city = userdata["city"]
+    xcxUser.province = userdata["province"]
+    xcxUser.country = userdata["country"]
+    xcxUser.avatarUrl = userdata["headimgurl"]
+    xcxUser.save()
+    return xcxUser
+
+
 def addAddress(request):
 
     return render(request,"addAddress.html")
@@ -372,8 +405,9 @@ def caseTest(request):
 def myAddress(request):
     return render(request,"myAddress.html",{"title":u"我的地址"})
 def page10070(request):
-    # TODO test openid
-    xcxSession = "5f9ee9007804ae13b54809a5e4c4225cbda8e936"
+    code=request.GET.get("code")
+    xcxUser=snsuser(code)
+    xcxSession=xcxUser.xcxSession
     image=IndexImage.objects.get(id=3)
     return render(request,"page10070.html",{"session_key":xcxSession,"image":image.image.url,"title":u"个人中心"})
 
