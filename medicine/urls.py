@@ -40,6 +40,7 @@ url(r'^index/', views.index),
 url(r'^bindCellPhone/', views.bindCellPhone),
 url(r'^caseOrder/', views.caseOrder),
 url(r'^caseTest/', views.caseTest),
+url(r'^wxindex/', views.wxindex),
 
 url(r'^myAddress/', views.myAddress),
 url(r'^page10070/', views.page10070),
