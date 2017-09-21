@@ -1,143 +1,73 @@
+$(function () {
+  $(".get-code-btn").click(function () {
+    code()
+  })
 
-var app = getApp()
-var util = require('../../utils/util.js')
+})
+function code() {
+  var phone=$(".code-tel").val()
 
-Page({
-  data: {
-    hideVerifyPhone: true,
-    
-    oldCode: '',
-    oldCodeBtnDisabled: false,
-    oldCodeStatus: '获取验证码',
-    nextStepDisabled: false,
-    newPhone: '',
-    newCode: '',
-    newCodeBtnDisabled: false,
-    newCodeStatus: '获取验证码',
-    bindNewPhoneBtnDisabled: false,
-    codeInterval: 60
-  },
-  onLoad: function(){
-    app.checkLogin()
-    var userInfo = app.getUserInfo();
-   
-
-   
-  },
-  dataInitial:function()
-  {},
-  sendCodeToNewPhone: function(){
-    if (this.data.newCodeBtnDisabled)
-    {return;}
-    var that = this;
-    
-    
-    this.setData({
-      oldCodeStatus: '正在发送...',
-      oldCodeBtnDisabled: true
-    })
-    app.sendRequest({
-      url: '/code/',
-      data:{
-        phone:that.data.newPhone
-
-      } ,
-      success: function(){
-        var second = that.data.codeInterval,
-            interval;
-
-        app.showToast({
-          title: '已发送',
-          icon: 'success'
-        })
-        interval = setInterval(function(){
+  $.ajax({
+    url:"/code/",
+    data:{"phone":phone,"session_key":getQueryString("session_key")},
+    type:"GET",
+    success: function (returndata) {
+          console.log(returndata.toString());
+      var second=60;
+      interval = setInterval(function(){
           if(second < 0) {
             clearInterval(interval);
-            that.setData({
-              newCodeStatus: '获取验证码',
-              newCodeBtnDisabled: false
-            })
+            $(".code-tel").attr('disabled',false);
+
+
+
           } else {
-            that.setData({
-              newCodeStatus: second+'s',
-              newCodeBtnDisabled:true
-            })
+              $(".code-tel").attr('disabled',true);
+            $(".code-tel").text(second)
             second--;
           }
         }, 1000);
       },
-      complete: function(){
-        that.setData({
-          newCodeStatus: '获取验证码',
-          newCodeBtnDisabled: false
-        })
+    error: function (returndata) {
+            console.log(returndata.toString());
+        }
+
+
+
+
+  })
+
+
+}
+
+function getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
+}
+
+function sub() {
+  $.ajax({
+        url: '/code/',
+        type: 'POST',
+        data: {
+          code: $(".codeinupt").val(),
+          phone:$(".code-tel").val()
+        },
+        success: function () {
+
+
+
+         alert("绑定成功")
+          window.history.back();
+        },
+        fail: function () {
+          alert("验证码错误")
+
+
+        }
       }
-    })
+  )
 
-  },
-  inputOldCode: function(e){
-    this.setData({
-      oldCode: e.detail.value
-    })
-  },
-  bindNewPhone: function(){
-    var that = this;
-    if (!this.data.newCode){
-      app.showModal({
-        content: '请输入验证码'
-      })
-      return;
-    }
-   
-    this.setData({
-      nextStepDisabled: true
-    })
-    app.sendRequest({
-      url: '/code/',
-      method: 'post',
-      data: {
-        code: this.data.newCode,
-        phone: this.data.newPhone
-      },
-      success: function(){
-       
-        app.showToast({
-          title: '绑定成功',
-          icon: 'success'
-        })
-        app.globalData.userInfo.phone = this.data.newPhone;
-
-        setTimeout(function () {
-          app.turnBack()
-        }.bind(this), 2000)
-      },
-      fail:function()
-      {
-        app.showToast({
-          title: '验证码错误',
-          icon: 'fail'
-        })
-
-      }
-      ,
-      complete: function(){
-        that.setData({
-          nextStepDisabled: false
-        })
-      }
-    })
-  },
-  inputPhone: function(e){
-    this.setData({
-      newPhone: e.detail.value
-    })
-  },
-  inputNewCode: function (e) {
-    this.setData({
-      newCode: e.detail.value
-    })
-  },
-  
- 
-
-})
+}

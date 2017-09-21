@@ -127,7 +127,7 @@ function subit() {
 
 
 
-  data.append("session_key",getQueryString("xcxSession"))
+  data.append("session_key",getQueryString("session_key"))
  $.ajax({
         type: "POST",
         url: "/api/casehistory/",
