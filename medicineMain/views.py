@@ -365,6 +365,7 @@ def caseTest(request):
         dict={}
         dict["symptom_set"]=list
         dict["disable"] = False
+	dict["title"]=u"健康自测"
         return render(request,"caseTest.html",dict)
 
 
