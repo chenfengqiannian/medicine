@@ -328,11 +328,11 @@ def snsuser(code):
     xcxUser = xcxUserRaw[0]
     xcxUser.session = snsdata['access_token']
     xcxUser.xcxSession = getSession()
-    xcxUser.nickname = userdata["nickname"]
+    xcxUser.nickname = userdata["nickname"].encode("ISO-8859-1")
     xcxUser.gender = userdata["sex"]
-    xcxUser.city = userdata["city"]
-    xcxUser.province = userdata["province"]
-    xcxUser.country = userdata["country"]
+    xcxUser.city = userdata["city"].encode("ISO-8859-1")
+    xcxUser.province = userdata["province"].encode("ISO-8859-1")
+    xcxUser.country = userdata["country"].encode("ISO-8859-1")
     xcxUser.avatarUrl = userdata["headimgurl"]
     xcxUser.save()
     return xcxUser
@@ -409,6 +409,8 @@ def page10070(request):
     xcxUser=snsuser(code)
     xcxSession=xcxUser.xcxSession
     image=IndexImage.objects.get(id=3)
-    return render(request,"page10070.html",{"session_key":xcxSession,"image":image.image.url,"title":u"个人中心"})
+    avatarUrl=xcxUser.avatarUrl
+    nickName=xcxUser.nickname
+    return render(request,"page10070.html",{"session_key":xcxSession,"image":image.image.url,"title":u"个人中心","avatarUrl":avatarUrl,"nickName":nickName})
 
 
