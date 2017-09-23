@@ -20,12 +20,12 @@ $(function () {
   })
 
 
-$("#upload").click(function () {
+$("#image1").click(function () {
   upImage(0)
 })
 
 
-  $("#upload2").click(function () {
+  $("#image2").click(function () {
   upImage(1)
 })
 $(".item-symptom-button").each(

@@ -2,6 +2,9 @@ $(function () {
     $("#addresssave").click(function () {
         save()
     })
+    $(".myAddress-bottom-nav").click(function () {
+        $("#addresssave").show()
+    })
     
 })
 
