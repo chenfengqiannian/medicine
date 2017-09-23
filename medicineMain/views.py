@@ -452,6 +452,7 @@ def caseTest(request):
 def myAddress(request):
     return render(request,"myAddress.html",{"title":u"我的地址"})
 def page10070(request):
+
     code=request.GET.get("code")
     xcxUser=snsuser(code)
     xcxSession=xcxUser.xcxSession

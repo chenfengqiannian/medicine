@@ -1,9 +1,13 @@
 $(function () {
+
+
     $("#addresssave").click(function () {
         save()
     })
     $(".myAddress-bottom-nav").click(function () {
-        $("#addresssave").show()
+        $("#formaddressa").show()
+         $(".myAddress-bottom-nav").hide()
+
     })
     
 })
@@ -32,7 +36,8 @@ function save()
         mimeType: "multipart/form-data",
         success: function (returndata) {
           console.log(returndata.toString());
-             $("#addresssave").hide()
+             $(".myAddress-bottom-nav").show()
+             $("#formaddressa").hide()
 
         }
         ,
