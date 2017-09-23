@@ -4,7 +4,7 @@ from django.db import models
 class XcxUser(models.Model):
     openid = models.CharField(max_length=255)
     session = models.CharField(max_length=255, blank=True)
-
+    xcxCode=models.CharField(max_length=255, blank=True)
     xcxSession = models.CharField(max_length=255, blank=True)
     modDateTime = models.DateTimeField(u'最后修改日期', auto_now=True)
     createDateTime = models.DateTimeField(u'创建日期', auto_now_add=True)

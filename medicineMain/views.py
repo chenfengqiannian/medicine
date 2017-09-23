@@ -1,4 +1,5 @@
 #coding=utf-8
+from django.core.files import File
 from django.shortcuts import render
 
 from django.db.models import Q
@@ -196,19 +197,58 @@ class DisableCSRFCheck(object):
 def imageUpApi(request):
 
     if request.method == 'POST':
-        outList=[]
-        for file in request.FILES.values():
-            #file_obj = request.FILES.get('file', None)
+        localIds=request.POST.get("localIds",None)
+        outList = []
+        if(localIds!=None):
+            session_key = request.POST.get("session_key")
+            a=get_object_or_404(XcxUser,xcxSession=session_key)
+
+            b=requests.get("https://api.weixin.qq.com/cgi-bin/media/get",{"access_token":a.session,"media_id":localIds})
+            import os
+
+            # 先定义一个带路径的文件
+
+            filename = localIds+".jpg"
+            # 将文件路径分割出来
+
+            file_dir = os.path.join(settings.MEDIA_ROOT,"images",filename)
+
+            # 判断文件路径是否存在，如果不存在，则创建，此处是创建多级目录
 
 
-            outDict={}
+                # 然后再判断文件是否存在，如果不存在，则创建
+            if not os.path.exists(filename):
+                os.system(r'touch %s' % filename)
+            with open(filename, 'wb') as fd:
+                for chunk in b.iter_content(1024):
+                    fd.write(chunk)
+            c=File.open(file_dir)
+            outDict = {}
 
+            goodsImage = UserImage.objects.create(image=c)
 
-            goodsImage=UserImage.objects.create(image=file)
-
-            outDict['id']=goodsImage.id
-            outDict['image']="http://"+request.get_host()+goodsImage.image.url
+            outDict['id'] = goodsImage.id
+            outDict['image'] = "http://" + request.get_host() + goodsImage.image.url
             outList.append(outDict)
+        else:
+
+
+
+
+
+
+            for file in request.FILES.values():
+                #file_obj = request.FILES.get('file', None)
+
+
+                outDict={}
+
+
+                goodsImage=UserImage.objects.create(image=file)
+
+                outDict['id']=goodsImage.id
+                outDict['image']="http://"+request.get_host()+goodsImage.image.url
+                outList.append(outDict)
 
 
 
@@ -297,8 +337,15 @@ def index(request):
     scrollImagesList=[]
 
     code=request.GET.get("code")
-    xcxUser = snsuser(code)
-    xcxSession=xcxUser.xcxSession
+    raw=XcxUser.objects.filter(xcxCode=code)
+    if(len(raw)>=1):
+        xcxSession=raw[0].xcxSession
+    else:
+
+
+
+        xcxUser = snsuser(code)
+        xcxSession=xcxUser.xcxSession
 
 
 
@@ -346,7 +393,7 @@ def bindCellPhone(request):
     return render(request,"bindCellphone.html")
 
 def caseOrder(request):
-    session_key = request.GET.get("session_key", "5f9ee9007804ae13b54809a5e4c4225cbda8e936")
+    session_key = request.GET.get("session_key")
     type=request.GET.get("type")
     xcxUser = get_object_or_404(XcxUser, xcxSession=session_key)
     list=[]

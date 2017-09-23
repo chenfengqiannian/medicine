@@ -20,12 +20,12 @@ $(function () {
   })
 
 
-$("#upload").change(function () {
+$("#upload").click(function () {
   upImage(0)
 })
 
 
-  $("#upload2").change(function () {
+  $("#upload2").click(function () {
   upImage(1)
 })
 $(".item-symptom-button").each(
@@ -143,7 +143,8 @@ function subit() {
         success: function (returndata) {
             console.log(returndata.toString());
             alert("提交成功")
-            window.history.back()
+            window.location="/index/";
+
 
 
 
@@ -159,33 +160,30 @@ function subit() {
 }
 
 function upImage(index) {
-  if(index==0)
-  {
-    var files = $("#upload")[0].files
+  wx.chooseImage({
+    count: 1, // 默认9
+    sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
+    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+    success: function (res) {
+        var localIds = res.localIds;
 
-  }
-  else
-  {var files = $("#upload2")[0].files
 
+        // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
 
-  }
+   wx.uploadImage({
+    localId: localIds, // 需要上传的图片的本地ID，由chooseImage接口获得
+    isShowProgressTips: 1, // 默认为1，显示进度提示
+    success: function (res) {
+        $.ajax(
+            {
+                url:"/upimage/",
+                type:"POST",
+                data:{
+                    session_key:getQueryString("session_key"),
+                    localIds:localIds
 
-    var formData = new FormData();
-
-         formData.append((new Date()).valueOf()
-        , files[0])
-
-    $.ajax({
-        type: "POST",
-        url: "/imageupapi/",
-
-        data: formData,
-
-        cache: false,
-        contentType: false,
-        processData: false,
-        mimeType: "multipart/form-data",
-        success: function (returndata) {
+                },
+                success: function (returndata) {
             console.log(returndata.toString());
           mjson=JSON.parse(returndata)
           if(index==0)
@@ -209,7 +207,35 @@ function upImage(index) {
         error: function (returndata) {
             console.log(returndata.toString());
         }
-    });
+
+
+
+
+            }
+        )
+
+
+
+
+        // 返回图片的服务器端ID
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+    }
+});
+
+
+
 
 
 }
