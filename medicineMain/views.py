@@ -369,7 +369,13 @@ def index(request):
 
 
 def snsuser(code):
+    raw = XcxUser.objects.filter(xcxCode=code)
+    if (len(raw) >= 1):
+        return raw
+
     snsdata = getSnsData(settings.SNS_ID, settings.SNS_SECRET, code)
+
+
     userdata = getSnsUserData(snsdata["access_token"], snsdata["openid"])
     xcxUserRaw = XcxUser.objects.get_or_create(openid=snsdata['openid'])
     xcxUser = xcxUserRaw[0]
@@ -450,7 +456,14 @@ def caseTest(request):
 
 
 def myAddress(request):
-    return render(request,"myAddress.html",{"title":u"我的地址"})
+    session_key = request.GET.get("session_key")
+    xcxUser = get_object_or_404(XcxUser, xcxSession=session_key)
+    queryset=xcxUser.address_set
+    list = serializers.AddressSerializers(queryset, many=True, context={'request': request}).data
+
+
+
+    return render(request,"myAddress.html",{"title":u"我的地址"},{"list":list})
 def page10070(request):
 
     code=request.GET.get("code")
