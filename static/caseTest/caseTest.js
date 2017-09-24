@@ -19,15 +19,13 @@ $(function () {
         subit()
     })
 
-
-    $("#image1").click(function () {
-        upImage(0)
+    $('#upload').change(function () {
+        upImagef(0)
+    })
+    $('#upload2').change(function () {
+        upImagef(1)
     })
 
-
-    $("#image2").click(function () {
-        upImage(1)
-    })
     $(".item-symptom-button").each(
         function () {
             var currentEle = $(this);
@@ -141,6 +139,61 @@ function subit() {
         error: function (returndata) {
             console.log(returndata.toString());
             alert("提交失败")
+        }
+    });
+
+
+}
+function upImagef(index) {
+  if(index==0)
+  {
+    var files = $("#upload")[0].files
+
+  }
+  else
+  {var files = $("#upload2")[0].files
+
+
+  }
+
+    var formData = new FormData();
+
+         formData.append((new Date()).valueOf()
+        , files[0])
+
+    $.ajax({
+        type: "POST",
+        url: "/imageupapi/",
+
+        data: formData,
+
+        cache: false,
+        contentType: false,
+        processData: false,
+        mimeType: "multipart/form-data",
+        success: function (returndata) {
+            console.log(returndata.toString());
+          mjson=JSON.parse(returndata)
+          if(index==0)
+          {
+
+            $("#image1").attr("src",mjson[0].image)
+            $("#image1").attr("data-id",mjson[0].id)
+
+          }
+           if(index==1)
+          {
+
+            $("#image2").attr("src",mjson[0].image)
+            $("#image2").attr("data-id",mjson[0].id)
+
+
+          }
+
+
+        },
+        error: function (returndata) {
+            console.log(returndata.toString());
         }
     });
 
