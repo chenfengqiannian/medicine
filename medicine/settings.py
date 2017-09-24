@@ -112,9 +112,9 @@ USE_L10N = True
 USE_TZ = True
 XCX_ID="wx2111dcabe5669d87"
 XCX_SECRET="7bca9239e9b351532571e5006680c12f"
-SNS_ID=""
-SNS_SECRET=""
-TOKEN=""
+SNS_ID="wx0645b5ef79b0b637"
+SNS_SECRET="0b7a92901b3a967f65b68c18d2a73854"
+TOKEN="nIMymuc8Myg8eTK4"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
