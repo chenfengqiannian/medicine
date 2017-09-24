@@ -82,3 +82,7 @@ width: 100%;
 
 
 }
+.inline
+{
+  display: inline-block;
+}

@@ -463,7 +463,7 @@ def myAddress(request):
 
 
 
-    return render(request,"myAddress.html",{"title":u"我的地址"},{"list":list})
+    return render(request,"myAddress.html",{"title":u"我的地址","list":list})
 def page10070(request):
 
     code=request.GET.get("code")

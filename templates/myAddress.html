@@ -27,14 +27,12 @@
             {% for foo in list %}
                 <div class="myAddress-address">
                     <label class="check-box-container" data-id="{{ foo.id }}">
-                        <label class="check-box">
-                            <image src="http://img.zhichiwangluo.com/zc_app_fontschecked.png"></image>
-                        </label>
+
                     </label>
                     <div class="myAddress-address-top">
-                        <text>{{ foo.name }}</text>
-                        <text>{{ foo.contact }}</text>
-                        <div>{{ foo.address }}</div>
+                        <text class="inline">{{ foo.name }}</text>
+                        <text class="inline">{{ foo.contact }}</text>
+                        <div class="inline">{{ foo.detailAddress }}</div>
                     </div>
 
                 </div>
