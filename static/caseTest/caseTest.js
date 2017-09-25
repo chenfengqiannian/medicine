@@ -140,7 +140,7 @@ function subit() {
         success: function (returndata) {
             console.log(returndata.toString());
             alert("提交成功")
-            window.location = "/index/";
+            window.history.back();
 
 
         },
