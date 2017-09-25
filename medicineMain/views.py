@@ -390,6 +390,7 @@ def snsuser(code):
     xcxUser.province = userdata["province"].encode("ISO-8859-1")
     xcxUser.country = userdata["country"].encode("ISO-8859-1")
     xcxUser.avatarUrl = userdata["headimgurl"]
+    xcxUser.xcxCode=code
     xcxUser.save()
     return xcxUser
 
