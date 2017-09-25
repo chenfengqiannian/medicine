@@ -476,7 +476,7 @@ def page10070(request):
     image=IndexImage.objects.get(id=3)
     avatarUrl=xcxUser.avatarUrl
     nickName=xcxUser.nickname
-    return render(request,"page10070.html",{"session_key":xcxSession,"image":image.image.url,"title":u"个人中心","avatarUrl":avatarUrl,"nickName":nickName})
+    return render(request,"page10070.html",{"session_key":xcxSession,"image":image.image.url,"title":u"个人中心","avatarUrl":avatarUrl,"nickname":nickName})
 def jssdk(request):
     session_key=request.GET.get("session_key")
     xcxUser = get_object_or_404(XcxUser, xcxSession=session_key)
