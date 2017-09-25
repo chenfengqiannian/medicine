@@ -70,6 +70,7 @@
     height: 100px;
     width: 100px;
     margin-left: 5px;
+    transform:rotate(90deg);
 }
 
 .image-item {
