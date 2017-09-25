@@ -374,7 +374,7 @@ def index(request):
 def snsuser(code):
     raw = XcxUser.objects.filter(xcxCode=code)
     if (len(raw) >= 1):
-        return raw
+        return raw[0]
 
     snsdata = getSnsData(settings.SNS_ID, settings.SNS_SECRET, code)
 
