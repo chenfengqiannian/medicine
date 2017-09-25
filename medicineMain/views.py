@@ -243,6 +243,9 @@ def imageUpApi(request):
 
                 outDict={}
 
+                file.name=file.field_name
+
+
 
                 goodsImage=UserImage.objects.create(image=file)
 
