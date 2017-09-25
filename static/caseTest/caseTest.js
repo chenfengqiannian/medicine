@@ -233,7 +233,7 @@ function upImagef(data,type,index) {
 
             $("#image1").attr("src",mjson[0].image)
             $("#image1").attr("data-id",mjson[0].id)
-              $("#image1").attr("transform","rotate(90deg)")
+              $("#image1").css("transform","rotate(90deg)")
 
           }
            if(index==1)
@@ -241,7 +241,7 @@ function upImagef(data,type,index) {
 
             $("#image2").attr("src",mjson[0].image)
             $("#image2").attr("data-id",mjson[0].id)
- $("#image2").attr("transform","rotate(90deg)")
+ $("#image2").css("transform","rotate(90deg)")
 
 
           }
