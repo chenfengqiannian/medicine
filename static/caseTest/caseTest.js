@@ -6,7 +6,9 @@
   var tctx = tCanvas.getContext("2d");
 
 $(function () {
-
+    $(".close").click(function () {
+        $(".deatil-div").hide()
+    })
 
     $(".delete-applet").each(
         function () {
@@ -29,10 +31,38 @@ $(function () {
 
     $('#upload').change(function () {
         com(0,this)
+        $(this).attr("disabled","disabled")
+
+
+$(this).hide()
+
     })
+
+     $("#image1").click(function () {
+            $(".deatil-div").show()
+            var src=$(this).attr("src")
+         if(src=="../static/images/upimage_03.png")
+             return
+         $(".detail").attr("src",src)
+           $(".deatil-div").show()
+        })
+    $("#image2").click(function () {
+if(src=="../static/images/upimage_03.png")
+             return
+            var src=$(this).attr("src")
+            $(".detail").attr("src",src)
+
+        $(".deatil-div").show()
+        })
+
     $('#upload2').change(function () {
         com(1,this)
+        $(this).attr("disabled","disabled")
+        $(this).hide()
+
+
     })
+
 
     $(".item-symptom-button").each(
         function () {
