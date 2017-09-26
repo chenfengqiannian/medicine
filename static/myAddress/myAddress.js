@@ -14,16 +14,21 @@ $(function () {
 
 function save()
 {
-    var mdata={}
-    mdata.session_key=getQueryString("session_key")
-    mdata.name=$("[name|='name']").val()
-     mdata.contact=$("[name|='contact']").val()
-     mdata.detailAddress=$("[name|='detailAddress']").val()
-    mdata.province= $("[name|='province]").val()
-    mdata.city= $("[name|='city']").val()
-    mdata.district= $("[name|='district']").val()
+    try {
 
+        var mdata = {}
+        mdata.session_key = getQueryString("session_key")
+        mdata.name = $("[name|='name']").val()
+        mdata.contact = $("[name|='contact']").val()
+        mdata.detailAddress = $("[name|='detailAddress']").val()
+        mdata.province = $("[name|='province]").val()
+        mdata.city = $("[name|='city']").val()
+        mdata.district = $("[name|='district']").val()
 
+    }
+    catch(err)
+        {alert(err.name+err.message)
+        }
 
     $.ajax({
         type: "POST",
@@ -36,8 +41,7 @@ function save()
         mimeType: "multipart/form-data",
         success: function (returndata) {
           console.log(returndata.toString());
-             $(".myAddress-bottom-nav").show()
-             $("#formaddressa").hide()
+             location.reload(true)
 
         }
         ,
