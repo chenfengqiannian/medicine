@@ -165,7 +165,7 @@ select {
     display: none;
 }
 .text-detail
-{
+{   background: white;
     text-align: center;
     position: fixed;
     top: 20px;
