@@ -43,6 +43,7 @@ function save()
         ,
 
         error: function (returndata) {
+            alert(returndata.toString())
             console.log(returndata.toString());
         }
     });
