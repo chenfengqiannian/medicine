@@ -18,12 +18,12 @@ function save()
 
         var mdata = {}
         mdata.session_key = getQueryString("session_key")
-        mdata.name = $("[name|='name']").val()
-        mdata.contact = $("[name|='contact']").val()
-        mdata.detailAddress = $("[name|='detailAddress']").val()
-        mdata.province = $("[name|='province]").val()
-        mdata.city = $("[name|='city']").val()
-        mdata.district = $("[name|='district']").val()
+        mdata.name = $("#name").val()
+        mdata.contact = $("#contact").val()
+        mdata.detailAddress = $("#detailAddress").val()
+        mdata.province = $("#province").val()
+        mdata.city = $("#city").val()
+        mdata.district = $("#district").val()
 
     }
     catch(err)
