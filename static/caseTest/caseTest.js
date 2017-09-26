@@ -451,7 +451,7 @@ function com(index,upload) {
         } else {
             ctx.drawImage(img, 0, 0, width, height);
         }
-        canvas.rotate(90*Math.PI/180);
+
 
         //进行最小压缩
         var ndata = canvas.toDataURL('image/jpeg', 0.1);
