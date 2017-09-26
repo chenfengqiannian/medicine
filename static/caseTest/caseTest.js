@@ -233,7 +233,6 @@ function upImagef(data,type,index) {
 
             $("#image1").attr("src",mjson[0].image)
             $("#image1").attr("data-id",mjson[0].id)
-              $("#image1").css("transform","rotate(90deg)")
 
           }
            if(index==1)
@@ -241,7 +240,7 @@ function upImagef(data,type,index) {
 
             $("#image2").attr("src",mjson[0].image)
             $("#image2").attr("data-id",mjson[0].id)
- $("#image2").css("transform","rotate(90deg)")
+
 
 
           }
@@ -380,7 +379,6 @@ function com(index,upload) {
 
                 //如果图片大小小于100kb，则直接上传
                 if (result.length <= 102400) {
-                    $(li).css("background-image", "url(" + result + ")");
                     img = null;
                     upImagef(data,file.type,index);
                     return;
@@ -453,6 +451,7 @@ function com(index,upload) {
         } else {
             ctx.drawImage(img, 0, 0, width, height);
         }
+        canvas.rotate(90*Math.PI/180);
 
         //进行最小压缩
         var ndata = canvas.toDataURL('image/jpeg', 0.1);
