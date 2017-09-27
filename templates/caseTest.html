@@ -116,11 +116,11 @@
 
                 <image src="{{ userimage_set.0.image|default:'../static/images/upimage_03.png' }}" catchtap="upimage1"
                        class="upimage" id="image1">
-                    <input type="file" class="upload-input" id="upload" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"/>
+                    <input type="file"   capture="camera" class="upload-input" id="upload" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"/>
 
                      </image>
                 <image src="{{ userimage_set.1.image|default:'../static/images/upimage_03.png' }}" id="image2" catchtap="upimage2"
-                       class="upimage"> <input type="file" style="margin-left: 110px" class="upload-input" id="upload2" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" /></image>
+                       class="upimage"> <input type="file"  capture="camera" style="margin-left: 110px" class="upload-input" id="upload2" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" /></image>
 
             </div>
         </div>
