@@ -160,6 +160,10 @@ select {
 
 
 }
+.deatil-div img
+{
+    transform: rotate(90deg);
+}
 .deatil-div
 {
     display: none;
