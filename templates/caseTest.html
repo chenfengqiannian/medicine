@@ -114,8 +114,8 @@
             <text class="item-label">上传二张舌苔照片(要求：自然光线下，放松）</text>
             <div class="image-item">
 
-                <image src="{{ userimage_set.0.image|default:'../static/images/upimage_03.png' }}" catchtap="upimage1"
-                       class="upimage" id="image1">
+                <image src="{{ userimage_set.0.image|default:'../static/images/upimage_03.png' }}" {% if not disable  %}style="transform:rotate(90)" {% endif %}catchtap="upimage1"
+                       class="upimage" id="image1" >
                     {% if not disable  %}
                     <input type="file"   capture="camera" class="upload-input" id="upload"  accept="image/*"/>
 {% endif %}
