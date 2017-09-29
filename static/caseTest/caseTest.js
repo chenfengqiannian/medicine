@@ -6,6 +6,11 @@
   var tctx = tCanvas.getContext("2d");
 
 $(function () {
+
+
+
+
+
     $(".close").click(function () {
         $(".deatil-div").hide()
     })
@@ -101,6 +106,11 @@ function up() {
         mimeType: "multipart/form-data",
         success: function (returndata) {
             console.log(returndata.toString());
+
+
+
+
+
         }
         ,
 
@@ -111,6 +121,20 @@ function up() {
 
 
 }
+
+function  androidroapple() {
+    var u = navigator.userAgent;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+
+
+    return isAndroid
+
+
+
+}
+
+
 function subit() {
 
 
@@ -227,23 +251,29 @@ function upImagef(data,type,index) {
         mimeType: "multipart/form-data",
         success: function (returndata) {
             console.log(returndata.toString());
-          mjson=JSON.parse(returndata)
-          if(index==0)
-          {
+            mjson = JSON.parse(returndata)
+            if (index == 0) {
 
-            $("#image1").attr("src",mjson[0].image)
-            $("#image1").attr("data-id",mjson[0].id)
+                $("#image1").attr("src", mjson[0].image)
+                $("#image1").attr("data-id", mjson[0].id)
 
-          }
-           if(index==1)
-          {
+            }
+            if (index == 1) {
 
-            $("#image2").attr("src",mjson[0].image)
-            $("#image2").attr("data-id",mjson[0].id)
+                $("#image2").attr("src", mjson[0].image)
+                $("#image2").attr("data-id", mjson[0].id)
 
 
+            }
+if (androidroapple())
+            {
 
-          }
+                $(".upimage").css("transform","")
+
+
+                $(".deatil-div img").css("transform","rotate(0deg)")
+                   }
+
 
 
         },

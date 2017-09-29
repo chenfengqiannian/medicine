@@ -45,6 +45,7 @@ url(r'^wxindex/', views.wxindex),
 url(r'^myAddress/', views.myAddress),
 url(r'^page10070/', views.page10070),
 url(r'^addAddress/', views.addAddress),
+url(r'^userinfo1/', views.userinfo),
 
 
 url(r'^media/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.MEDIA_ROOT})

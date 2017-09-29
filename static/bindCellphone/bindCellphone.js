@@ -2,6 +2,9 @@ $(function () {
   $(".get-code-btn").click(function () {
     code()
   })
+    $(".bind-new-tel-btn").click(function () {
+        sub()
+    })
 
 })
 function code() {
@@ -17,13 +20,14 @@ function code() {
       interval = setInterval(function(){
           if(second < 0) {
             clearInterval(interval);
-            $(".code-tel").attr('disabled',false);
+            $(".get-code-btn").attr('disabled',false);
+              $(".get-code-btn").text("获取验证码")
 
 
 
           } else {
-              $(".code-tel").attr('disabled',true);
-            $(".code-tel").text(second)
+              $(".get-code-btn").attr('disabled',true);
+            $(".get-code-btn").text(second)
             second--;
           }
         }, 1000);
@@ -53,7 +57,8 @@ function sub() {
         type: 'POST',
         data: {
           code: $(".codeinupt").val(),
-          phone:$(".code-tel").val()
+          phone:$(".code-tel").val(),
+            session_key:getQueryString("session_key")
         },
         success: function () {
 

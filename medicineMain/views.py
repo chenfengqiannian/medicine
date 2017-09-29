@@ -35,7 +35,7 @@ def getSession():
     return hashlib.sha1(os.urandom(24)).hexdigest()
 def getCode(phone):
     code=str(random.randint(1000,9999))
-    r = requests.get(' http://qxt.fungo.cn/Recv_center',
+    r = requests.get('http://qxt.fungo.cn/Recv_center',
                      params={'CpName': "rkdf", 'CpPassword': "rk0902",
                              'DesMobile': phone,"Content":"【短信吧】您的验证码是"+code+".一分钟内有效"})  # 最基本的GET请求
 
@@ -477,6 +477,16 @@ def page10070(request):
     avatarUrl=xcxUser.avatarUrl
     nickName=xcxUser.nickname
     return render(request,"page10070.html",{"session_key":xcxSession,"image":image.image.url,"title":u"个人中心","avatarUrl":avatarUrl,"nickname":nickName})
+def userinfo(request):
+    session_key = request.GET.get("session_key")
+    xcxUser = get_object_or_404(XcxUser, xcxSession=session_key)
+
+    dict = serializers.UserSerializers(xcxUser, many=False, context={'request': request}).data
+    dict["session_key"]=session_key
+
+    return render(request,"userinfo.html",dict)
+
+
 def jssdk(request):
     session_key=request.GET.get("session_key")
     xcxUser = get_object_or_404(XcxUser, xcxSession=session_key)

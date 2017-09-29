@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/public.css">
+
+    <link rel="stylesheet" href="../static/caseTest/caseTest.css">
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src=" https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+
+
+
+
+</head>
+<body>
+<div class="content">
+     <div class="item-backgroud">
+            <div class="dialog-block-item">
+                <text class="item-label">姓名:{{  nickname}}</text>
+
+
+            </div>
+            <div class="dialog-block-item">
+                <text class="item-label">城市:{{ city }}</text>
+
+
+
+            </div>
+            <div class="dialog-block-item">
+                <text class="item-label">省:{{ province }}</text>
+
+
+
+            </div>
+            <div class="dialog-block-item">
+                <text class="item-label">国家:{{  country}}</text>
+
+
+
+            </div>
+        <div class="dialog-block-item">
+                <a class="item-label" href="/bindCellPhone/?session_key={{ session_key }}">{% if phone %} 联系电话:{% endif %}{{ phone|default:"点此处绑定手机" }}</a>
+
+
+
+            </div>
+        </div>
+
+
+
+</div>
+
+</body>
+</html>
