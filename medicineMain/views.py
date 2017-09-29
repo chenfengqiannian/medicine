@@ -423,6 +423,7 @@ def caseOrder(request):
             dic["text"] =i.physicalCondition
         if (type == "message"):
             dic["text"] = i.text
+        dic["id"]=i.id
         list.append(dic)
 
 

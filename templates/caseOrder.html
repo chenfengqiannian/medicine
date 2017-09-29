@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../static/caseOrder/caseOrder.css">
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 
-    <script type="text/javascript">
+    <script src="../static/caseOrder/caseOrder.js">
 
 
 
@@ -29,6 +29,7 @@
 <a class='dialog-block-item' href="{{ foo.url }}">
 <text class='item-text' id='text1'>{{foo.text}}</text>
 <text class='item-text' id='text2'>{{foo.modDateTime}}</text>
+{% if foo.url %}<div class="delete-button" type="button" data-id="{{ foo.id }}">删除</div>{% endif %}
 </a>
 
     {% endfor %}
